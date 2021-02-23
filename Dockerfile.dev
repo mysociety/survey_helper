@@ -1,0 +1,18 @@
+FROM python:3.8-buster
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY requirements-dev.txt .
+RUN pip install -r requirements-dev.txt
+
+ARG mapit_key
+ARG mapit_generation=41
+ARG access_key
+
+ENV MAPIT_KEY=$mapit_key ACCESS_KEY=$access_key MAPIT_GENERATION=$mapit_generation

@@ -1,0 +1,6 @@
+build:
+  docker:
+    web: Dockerfile
+  config:
+    SERVER_PRODUCTION: true
+    MAPIT_GENERATION: 41
