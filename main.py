@@ -189,7 +189,7 @@ def get_geo_information():
         return ("No valid postcode")
     mapit_data = get_mapit_from_postcode(postcode)
 
-    results = {"blank_value": ""}
+    results = {}
 
     results.update(mapit_data)
 
