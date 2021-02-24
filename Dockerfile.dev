@@ -11,8 +11,8 @@ RUN pip install -r requirements.txt
 COPY requirements-dev.txt .
 RUN pip install -r requirements-dev.txt
 
-ARG mapit_key
-ARG mapit_generation=41
-ARG access_key
+ARG MAPIT_KEY
+ARG MAPIT_GENERATION=41
+ARG ACCESS_KEY
 
-ENV MAPIT_KEY=$mapit_key ACCESS_KEY=$access_key MAPIT_GENERATION=$mapit_generation
+ENV MAPIT_KEY=$MAPIT_KEY ACCESS_KEY=$ACCESS_KEY MAPIT_GENERATION=$mapit_generation

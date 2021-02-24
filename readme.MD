@@ -52,7 +52,3 @@ docker build -t survey_helper --build-arg MAPIT_KEY={{mapit_key}} --build-arg AC
 docker run -dp 5000:5000 survey_helper
 
 ```
-
-## Deploy to heroku
-
-???
