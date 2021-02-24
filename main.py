@@ -16,6 +16,7 @@ from waitress import serve
 
 def str_to_bool(x): return x.lower() == "true"
 
+
 production_server = str_to_bool(
     os.environ.get("SERVER_PRODUCTION", "false"))
 
@@ -25,6 +26,12 @@ ACCESS_KEY = os.environ.get("ACCESS_KEY", None)
 PORT = int(os.environ.get('PORT', 5000))
 
 postcode_url = "https://mapit.mysociety.org/postcode/{postcode}?generation={generation}"
+
+
+nice_nation = {"E": "England",
+               "S": "Scotland",
+               "W": "Wales",
+               "N": "Northern Ireland"}
 
 
 def try_keys(di, *keys):
@@ -49,9 +56,9 @@ def region_lookup():
 @lru_cache
 def rurality_lookup():
     df = pd.read_csv(Path("resources", "composite_ruc.csv"))
-    df["uk-ruc-3"] = df["ukruc-3"].map({0: "Urban",
-                                        1: "Rural",
-                                        2: "More rural"})
+    df["ukruc-3"] = df["ukruc-3"].map({0: "Urban",
+                                       1: "Rural",
+                                       2: "More rural"})
     return df.set_index("lsoa")["ukruc-3"].to_dict()
 
 
@@ -129,6 +136,7 @@ def get_mapit_from_postcode(postcode):
         final["nation"] = final["lsoa"][0]
         if final["nation"] == "9":
             final["nation"] = "N"
+        final["nation"] = nice_nation[final["nation"]]
 
     return final
 
