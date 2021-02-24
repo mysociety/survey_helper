@@ -22,6 +22,7 @@ production_server = str_to_bool(
 MAPIT_GENERATION = os.environ.get("MAPIT_GENERATION", 41)
 MAPIT_API_KEY = os.environ.get("MAPIT_KEY", None)
 ACCESS_KEY = os.environ.get("ACCESS_KEY", None)
+PORT = int(os.environ.get('PORT', 5000))
 
 postcode_url = "https://mapit.mysociety.org/postcode/{postcode}?generation={generation}"
 
@@ -197,6 +198,6 @@ def get_geo_information():
 
 if __name__ == "__main__":
     if production_server:
-        serve(app, host='0.0.0.0', port=5000)
+        serve(app, host='0.0.0.0', port=PORT)
     else:
         app.run(host="0.0.0.0", debug=True)
